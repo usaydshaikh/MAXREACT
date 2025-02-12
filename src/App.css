@@ -1,0 +1,577 @@
+/* ---------------- Global Styles & CSS Variables ---------------- */
+:root {
+  /* Base Colors */
+  --bg-color: #f0f2f5;
+  --text-color: #333;
+  
+  /* Navigation */
+  --nav-bg: linear-gradient(135deg, #000102 0%, #24243e 100%);
+  --nav-text: #fff;
+  
+  /* Buttons */
+  --btn-bg: #007bff;
+  --btn-hover-bg: #0056b3;
+  --btn-text: #fff;
+  
+  /* Links */
+  --link-color: #fff;
+  --link-hover-color: #ffdd57;
+  --active-link-color: #ffd700;
+  --active-link-border: #ffd700;
+  
+  /* Form & Input */
+  --input-border: #ccc;
+  --input-border-radius: 8px;
+  --input-padding: 10px;
+  
+  /* Shadows & Transitions */
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  --transition-speed: 0.3s;
+  
+  /* Cards (if you add any) */
+  --card-bg: #fff;
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  
+  /* Footer */
+  --footer-bg: #24243e;
+  --footer-text: #fff;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #ddd;
+  --nav-bg: linear-gradient(135deg, #1f1f1f 0%, #3a3a3a 100%);
+  --nav-text: #ccc;
+  --btn-bg: #0d6efd;
+  --btn-hover-bg: #0b5ed7;
+  --btn-text: #fff;
+  --link-color: #ccc;
+  --link-hover-color: #ffdd57;
+  --active-link-color: #ffd700;
+  --active-link-border: #ffd700;
+  --card-bg: #1a1a1a;
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  --footer-bg: #1f1f1f;
+  --footer-text: #ccc;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+/* ---------------- Spinner ---------------- */
+.spinner {
+  border: 4px solid rgba(0,0,0,0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: var(--btn-bg);
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------------- Semantic Layout ---------------- */
+header, nav, main, footer, section {
+  /* Using semantic elements for structure */
+}
+
+/* ---------------- Navigation ---------------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--nav-bg);
+  padding: 0 30px;
+  color: var(--nav-text);
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 70px;
+  transition: background var(--transition-speed);
+}
+
+.navbar-left .logo {
+  height: 40px;
+  cursor: pointer;
+  transition: transform var(--transition-speed);
+}
+
+.navbar-left .logo:hover {
+  transform: scale(1.05);
+}
+
+.navbar-center {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: var(--nav-text);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: all var(--transition-speed);
+}
+
+.nav-link:hover {
+  color: var(--link-hover-color);
+  transform: scale(1.05);
+}
+
+.nav-link.active {
+  color: var(--active-link-color);
+  border-bottom: 2px solid var(--active-link-border);
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-search input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  transition: all var(--transition-speed);
+}
+
+.search-btn {
+  padding: 8px 10px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.search-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+.navbar-right .login-btn,
+.navbar-right .logout-btn {
+  padding: 8px 14px;
+  background: #ffd02a;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background var(--transition-speed);
+}
+
+.navbar-right .login-btn:hover,
+.navbar-right .logout-btn:hover {
+  background: #ffbe0b;
+}
+
+/* ---------------- Modal ---------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideDown var(--transition-speed) ease;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  transition: color var(--transition-speed);
+}
+
+.modal-close-btn:hover {
+  color: #333;
+}
+
+/* ---------------- Auth Modal Tabs ---------------- */
+.auth-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color var(--transition-speed);
+  color: #24243e;
+}
+
+.auth-tab.active {
+  color: var(--btn-bg);
+  border-bottom: 2px solid var(--btn-bg);
+}
+
+.auth-content {
+  /* Optional spacing adjustments */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-form input {
+  padding: var(--input-padding);
+  font-size: 14px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-border-radius);
+  transition: border-color var(--transition-speed);
+}
+
+.auth-form input:focus {
+  border-color: var(--btn-bg);
+}
+
+.auth-form button {
+  padding: 10px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: var(--input-border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.auth-form button:hover {
+  background: var(--btn-hover-bg);
+}
+
+.modal-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.modal-options button {
+  background: none;
+  border: none;
+  color: var(--btn-bg);
+  cursor: pointer;
+  font-weight: bold;
+  transition: color var(--transition-speed);
+}
+
+.modal-options button:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* ---------------- AI Widget ---------------- */
+.ai-help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 3000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background var(--transition-speed);
+}
+
+.ai-help-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+.ai-widget .chat-window {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+.ai-widget .chat-message {
+  margin: 4px 0;
+}
+
+.ai-widget .chat-message.ai {
+  text-align: left;
+  color: var(--btn-bg);
+}
+
+.ai-widget .chat-message.user {
+  text-align: right;
+  color: #333;
+}
+
+.ai-widget .chat-input {
+  display: flex;
+  gap: 8px;
+}
+
+.ai-widget .chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color var(--transition-speed);
+}
+
+.ai-widget .chat-input input:focus {
+  border-color: var(--btn-bg);
+}
+
+.ai-widget .chat-input button {
+  padding: 8px 12px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.ai-widget .chat-input button:hover {
+  background: var(--btn-hover-bg);
+}
+
+/* ---------------- Hero Section ---------------- */
+.home-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-section {
+  position: relative;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-overlay h1 {
+  font-size: 4rem;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+.hero-overlay p {
+  font-size: 1.5rem;
+  color: #fff;
+  max-width: 600px;
+  margin-top: 20px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* ---------------- Dashboard Section ---------------- */
+.section.dashboard {
+  background: #fff;
+}
+.chart-container {
+  margin: 20px auto;
+  max-width: 620px;
+}
+
+/* ---------------- Contact Section ---------------- */
+.section.contact {
+  padding: 80px 20px;
+  text-align: center;
+  background: #fff;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-border-radius);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color var(--transition-speed);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--btn-bg);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.contact-form button {
+  padding: 12px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+.contact-form button:hover {
+  background: var(--btn-hover-bg);
+}
+
+/* ---------------- Content Sections ---------------- */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+  background: #fff;
+}
+.section:nth-of-type(even) {
+  background: #f7f7f7;
+}
+.section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #24243e;
+}
+.section p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---------------- Footer ---------------- */
+footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 30px 20px;
+  text-align: center;
+  transition: background var(--transition-speed), color var(--transition-speed);
+}
+.footer-social p {
+  margin: 0 0 15px;
+  font-size: 1rem;
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+.social-links a {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: color var(--transition-speed);
+}
+.social-links a:hover {
+  color: var(--link-hover-color);
+}
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+.footer-legal a {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: text-decoration var(--transition-speed);
+}
+.footer-legal a:hover {
+  text-decoration: underline;
+}
+footer p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ---------------- Animations ---------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ---------------- Main Layout ---------------- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1;
+}
